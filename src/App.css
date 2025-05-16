@@ -1,0 +1,388 @@
+/* Theme Setup */
+:root {
+  --bg-color: #f2f4f8;
+  --text-color: #111;
+  --card-color: #fff;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --button-bg: #007bff;
+  --button-hover: #0056b3;
+  --success-color: #28a745;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e2f;
+  --text-color: #f1f1f1;
+  --card-color: #2b2b3d;
+  --input-bg: #3a3a4d;
+  --input-border: #555;
+  --button-bg: #00aaff;
+  --button-hover: #008fcc;
+  --success-color: #00e676;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.4s, color 0.4s;
+  height: 100vh;
+}
+
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--bg-color);
+}
+
+
+
+.game-box {
+  background-color: var(--card-color);
+  padding: 24px 20px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: background 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.guess-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid var(--input-border);
+  border-radius: 30px;
+  background-color: var(--input-bg);
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.guess-button {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  background: radial-gradient(circle at 30% 30%, var(--button-bg), var(--button-hover));
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  background-size: 150% 150%;
+  background-position: center;
+  transition: background-position 0.4s ease-in-out, transform 0.2s ease;
+  margin: 0 auto;
+  display: block;
+}
+
+.guess-input:focus {
+  border-color: var(--button-bg);
+}
+
+.guess-button {
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05); /* semi-transparent base */
+  color: white;
+  backdrop-filter: blur(12px); /* glassy blur */
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.guess-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Default (dark mode) */
+.guess-button {
+  color: white;
+  /* rest of your mica styles */
+}
+
+/* Light mode override */
+[data-theme="light"] .guess-button {
+  color: black;
+}
+
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--bg-color);
+}
+
+.seven-seg {
+  font-family: 'Orbitron', 'Courier New', monospace;
+  font-weight: bold;
+  color: #00ff66;
+  background-color: #000;
+  border: 2px solid #00ff66;
+  text-align: center;
+  letter-spacing: 2px;
+  box-shadow: 0 0 10px #00ff66;
+  text-shadow: 0 0 3px #00ff66;
+}
+
+
+
+.success-message {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--success-color);
+  animation: fadeIn 0.8s ease;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.hidden-guess-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: auto; /* Allow focus & typing */
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.seven-segment-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.hidden-guess-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 0; /* hide cursor scaling */
+}
+
+
+.segment-digit {
+  width: 50px;
+  height: 70px;
+  font-size: 2.5rem;
+  font-family: 'Orbitron', monospace;
+  color: #00ff66;
+  background: #000;
+  border: 2px solid #00ff66;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 70px;
+  box-shadow: 0 0 12px #00ff66;
+  text-shadow: 0 0 5px #00ff66;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pop {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.app-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  animation: fadeInScale 0.6s ease-out;
+}
+
+.app-icon svg {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+
+/* Smooth fade+scale on load */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spiral-in {
+  0% {
+    transform: scale(0.9) rotate(-3deg);
+    background-position: 20% 20%;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    background-position: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .guess-input {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    border-radius: 24px;
+  }
+
+  .guess-button {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 24px;
+  }
+
+  .game-box {
+    padding: 20px 16px;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .app-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .guess-input {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .guess-button {
+    font-size: 0.75rem;
+    padding: 8px 12px;
+  }
+
+  .game-box {
+    padding: 18px 14px;
+    border-radius: 18px;
+  }
+
+  .app-icon svg {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.slot-animate {
+  animation: slot-spin 0.5s ease-in-out;
+}
+
+@keyframes slot-spin {
+  0% {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1) rotateX(180deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1) rotateX(360deg);
+    opacity: 1;
+  }
+}
+.segment-digit.correct {
+  color: #00ff66;
+  border-color: #00ff66;
+  text-shadow: 0 0 8px #00ff66;
+  box-shadow: 0 0 12px #00ff66;
+  animation: flashGreen 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes flashGreen {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+.segment-digit.wrong {
+  color: #ff3333;
+  border-color: #ff3333;
+  text-shadow: 0 0 8px #ff3333;
+  box-shadow: 0 0 12px #ff3333;
+  animation: flashRed 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes flashRed {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
