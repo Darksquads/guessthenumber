@@ -174,7 +174,7 @@ useEffect(() => {
         } else {
           setFeedback('WRNG');
           setTimeout(() => {
-            window.location.href = 'https://example.com';
+            window.location.href = 'https://cznull.github.io/vsbm';
           }, 1000);
         }
       }
